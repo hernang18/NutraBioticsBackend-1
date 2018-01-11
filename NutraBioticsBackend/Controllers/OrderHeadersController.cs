@@ -504,6 +504,19 @@ namespace NutraBioticsBackend.Controllers
 
             return View(orderHeader);
         }
+        
+        public JsonResult DeleteTemp()
+        {
+            List<OrderDetailTmp> listord = new List<OrderDetailTmp>();
+
+            listord=db.OrderDetailTmp.Where(o => o.UserId == userid).ToList();
+            foreach (var item in listord)
+            {
+                db.OrderDetailTmp.Remove(item);
+            }
+            db.SaveChanges();
+            return Json(listord);
+        }
 
         // POST: OrderHeaders/Delete/5
         [HttpPost, ActionName("Delete")]
